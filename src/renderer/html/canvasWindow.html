@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'self'; script-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';"
+		/>
+		<meta
+			http-equiv="X-Content-Security-Policy"
+			content="default-src 'self'; script-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';"
+		/>
+		<link rel="stylesheet" href="../css/app.min.css" />
+		<link rel="stylesheet" href="../css/nano.min.css" />
+		<link rel="stylesheet" href="../css/literallycanvas.css" />
+		<script src="../js/jquery-3.7.1.min.js"></script>
+		<script src="../js/pickr.min.js"></script>
+		<script src="../js/literallycanvas-core.js"></script>
+		<script src="../js/canvasWindow.js"></script>
+	</head>
+
+	<body class="relative">
+		<div id="canvas"></div>
+		<div id="canvas-tools" class="absolute z-10 w-[128px] rounded-lg shadow-[0_0_2px_0_gray]">
+			<div class="bg-gradient-to-b rounded-t-lg from-[#7A3FF6] to-[#451AA0] p-3">
+				<ul class="flex items-center gap-4">
+					<li class="flex">
+						<button id="mover" class="cursor-move">
+							<img src="../img/move.svg" alt="move" />
+						</button>
+					</li>
+					<li class="flex w-6">
+						<button class="duration-500 hover:scale-125 app-minimize">
+							<img src="../img/minimize.svg" alt="minimize" />
+						</button>
+						<button class="duration-500 hover:scale-125 app-maximize hidden">
+							<img src="../img/maximize.svg" alt="maximize" />
+						</button>
+					</li>
+					<li class="flex">
+						<button class="duration-500 hover:scale-125 app-close">
+							<img src="../img/close.svg" alt="close" />
+						</button>
+					</li>
+				</ul>
+			</div>
+			<div class="tools">
+				<div class="tools-row">
+					<div class="tool" data-lc-tool="Pencil">
+						<img src="../img/pencil-black.svg" alt="pencil" />
+					</div>
+					<div class="tool" data-lc-tool="Line">
+						<img src="../img/line.svg" alt="line" />
+						<img class="show-sub-tools w-2 absolute right-0" data-show-sub-tools="Line" src="../img/dropdown.svg" alt=">" />
+					</div>
+
+					<div class="sub-tools" data-sub-tools-id="Line">
+						<div class="sub-tool active" data-lc-tool="Line" data-lc-options='{"isDashed": false, "hasEndArrow": false}'>
+							<img src="../img/line.svg" alt="line" />
+						</div>
+						<div class="sub-tool" data-lc-tool="Line" data-lc-options='{"isDashed": false, "hasEndArrow": true}'>
+							<img src="../img/line-arrow.svg" alt="line arrow" />
+						</div>
+						<div class="sub-tool" data-lc-tool="Line" data-lc-options='{"isDashed": true,  "hasEndArrow": false}'>
+							<img src="../img/line-dashed.svg" alt="line dashed" />
+						</div>
+						<div class="sub-tool" data-lc-tool="Line" data-lc-options='{"isDashed": true, "hasEndArrow": true}'>
+							<img src="../img/line-dashed-arrow.svg" alt="line dashed arrow" />
+						</div>
+					</div>
+				</div>
+				<div class="tools-row">
+					<div class="tool" data-lc-tool="Rectangle">
+						<img src="../img/rectangle.svg" alt="rectangle" />
+						<img class="show-sub-tools w-2 absolute right-0" data-show-sub-tools="Rectangle" src="../img/dropdown.svg" alt=">" />
+					</div>
+					<div class="tool" data-lc-tool="Text">
+						<img src="../img/text.svg" alt="text" />
+						<img class="show-sub-tools w-2 absolute right-0" data-show-sub-tools="Text" src="../img/dropdown.svg" alt=">" />
+					</div>
+
+					<div class="sub-tools" data-sub-tools-id="Rectangle">
+						<div class="sub-tool active" data-lc-tool="Rectangle">
+							<img src="../img/rectangle.svg" alt="rectangle" />
+						</div>
+						<div class="sub-tool" data-lc-tool="Ellipse">
+							<img src="../img/ellipse.svg" alt="ellipse" />
+						</div>
+						<div class="sub-tool" data-lc-tool="Polygon">
+							<img src="../img/polygon.svg" alt="polygon" />
+						</div>
+					</div>
+
+					<div class="sub-tools" data-sub-tools-id="Text">
+						<div class="sub-tool text-option" data-lc-options="bold">
+							<img src="../img/bold.svg" alt="bold" />
+						</div>
+						<div class="sub-tool text-option" data-lc-options="italic">
+							<img src="../img/italic.svg" alt="italic" />
+						</div>
+					</div>
+				</div>
+				<div class="tools-row">
+					<div class="tool" data-lc-tool="Eraser">
+						<img src="../img/eraser.svg" alt="eraser" />
+					</div>
+					<div class="tool !px-0">
+						<div class="stroke-and-text-size">5px</div>
+						<img class="show-sub-tools w-2 absolute right-0" data-show-sub-tools="stroke-and-text-size" src="../img/dropdown.svg" alt=">" />
+					</div>
+
+					<div class="sub-tools" data-sub-tools-id="stroke-and-text-size">
+						<input
+							type="number"
+							id="stroke-and-text-size"
+							value="5"
+							class="w-16 text-center border-0 focus:ring-0 focus:outline-none bg-transparent"
+						/>
+					</div>
+				</div>
+				<div class="tools-row">
+					<div>
+						<p class="text-center pt-2 text-[#343434] text-[10px]">Fill</p>
+						<div class="tool !pt-0">
+							<div class="color-picker" id="fill">
+								<div class="pickr"></div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<p class="text-center pt-2 text-[#343434] text-[10px]">Stroke</p>
+						<div class="tool !pt-0">
+							<div class="color-picker" id="stroke">
+								<div class="pickr"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tools-row">
+					<div class="tool disabled" id="tool-undo">
+						<img src="../img/undo.svg" alt="undo" />
+					</div>
+					<div class="tool disabled" id="tool-redo">
+						<img src="../img/redo.svg" alt="redo" />
+					</div>
+				</div>
+				<div class="tools-row justify-center">
+					<div class="tool" id="tool-clear">
+						<img src="../img/trash-black.svg" alt="clear" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

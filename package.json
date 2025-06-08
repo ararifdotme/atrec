@@ -1,0 +1,56 @@
+{
+  "name": "atrec",
+  "productName": "atrec",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "tailwind": "npx @tailwindcss/cli -cwd=src/renderer -o ./src/renderer/assets/css/app.min.css --minify",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint --ext .ts,.tsx ."
+  },
+  "keywords": [],
+  "author": {
+    "name": "Arifur Rahman Arif",
+    "email": "ararif724@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.8.1",
+    "@electron-forge/maker-deb": "^7.8.1",
+    "@electron-forge/maker-rpm": "^7.8.1",
+    "@electron-forge/maker-squirrel": "^7.8.1",
+    "@electron-forge/maker-zip": "^7.8.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.8.1",
+    "@electron-forge/plugin-fuses": "^7.8.1",
+    "@electron-forge/plugin-webpack": "^7.8.1",
+    "@electron/fuses": "^1.8.0",
+    "@tailwindcss/cli": "^4.1.8",
+    "@types/jquery": "^3.5.32",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
+    "axios": "^1.9.0",
+    "copy-webpack-plugin": "^13.0.0",
+    "css-loader": "^6.11.0",
+    "electron": "36.3.1",
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.31.0",
+    "fork-ts-checker-webpack-plugin": "^7.3.0",
+    "jquery": "^3.7.1",
+    "node-loader": "^2.1.0",
+    "style-loader": "^3.3.4",
+    "tailwindcss": "^4.1.8",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "~4.5.4"
+  },
+  "dependencies": {
+    "electron-cnf": "^2.0.0",
+    "electron-log": "^5.4.0",
+    "electron-squirrel-startup": "^1.0.1"
+  }
+}

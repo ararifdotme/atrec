@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: "Poppins";
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype");
+	}
+	@font-face {
+		font-family: "Poppins";
+		font-style: normal;
+		font-weight: 500;
+		font-display: swap;
+		src: url("../font/Poppins/Poppins-Medium.ttf") format("truetype");
+	}
+	@font-face {
+		font-family: "Poppins";
+		font-style: normal;
+		font-weight: 600;
+		font-display: swap;
+		src: url("../font/Poppins/Poppins-SemiBold.ttf") format("truetype");
+	}
+	@font-face {
+		font-family: "Poppins";
+		font-style: normal;
+		font-weight: 700;
+		font-display: swap;
+		src: url("../font/Poppins/Poppins-Bold.ttf") format("truetype");
+	}
+	html,
+	body {
+		font-family: "Poppins";
+		overflow: hidden;
+	}
+	img {
+		user-drag: none;
+		-webkit-user-drag: none;
+	}
+	.title-bar,
+	.drag {
+		cursor: move;
+		-webkit-app-region: drag;
+	}
+	.title-bar li {
+		cursor: initial;
+		-webkit-app-region: no-drag;
+	}
+	.recording-btn {
+		background-image: linear-gradient(to bottom, #7a3ff6 0%, #451aa0 100%);
+		display: flex;
+		gap: 16px;
+		width: 75%;
+		justify-content: center;
+		align-items: center;
+		margin: 10px;
+		padding: 15px 45px;
+		text-align: center;
+		text-transform: capitalize;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: white;
+		box-shadow: 0 0 20px #eee;
+		border-radius: 999px;
+	}
+	.recording-btn:hover {
+		background-position: right center;
+		color: #fff;
+		text-decoration: none;
+	}
+	#pen.disabled {
+		@apply opacity-50 cursor-not-allowed;
+	}
+	#cam-video {
+		-webkit-app-region: drag;
+		border: 5px solid #ac8dee;
+		border-radius: 24px;
+		@apply opacity-0 transition-opacity duration-500;
+	}
+	#cam-video.ready {
+		@apply opacity-100;
+	}
+	#cam-video.ready.screen-camera-mode {
+		@apply rounded-full object-cover object-center h-screen w-full;
+	}
+	.control > div {
+		@apply cursor-pointer duration-300 hover:scale-110;
+	}
+	.select-box .select-options-list ul li {
+		@apply text-start w-full py-2 px-3 text-slate-600 text-sm duration-500 rounded-lg hover:bg-primary-hover;
+	}
+	.popup {
+		@apply absolute z-10 top-0 left-0 w-full h-full bg-[#3C3C41] bg-opacity-50;
+	}
+	.popup .popup-body {
+		@apply p-5 absolute text-center rounded-lg left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white;
+	}
+	.tools {
+		@apply rounded-b-lg bg-[#F8F5FF] px-3 pb-4;
+	}
+	.tools .tools-row {
+		@apply flex items-center gap-2 relative;
+	}
+	.tools .tools-row .tool {
+		@apply cursor-default p-2 m-1 w-10 rounded-md relative;
+	}
+	.tools .tools-row .tool img:not(.show-sub-tools),
+	.tools .tools-row .sub-tools .sub-tool img {
+		@apply hover:scale-110 duration-300;
+	}
+	.tools .tools-row .tool.active,
+	.tools .tools-row .sub-tools .sub-tool.active {
+		@apply bg-[#E2D4FF];
+	}
+	.tools .tools-row .tool.disabled {
+		@apply opacity-50 cursor-not-allowed;
+	}
+	.tools .tools-row .tool .color-picker {
+		@apply w-6 h-6 border-[#A6A6A6] overflow-hidden rounded-[4px] border-[1px];
+	}
+	.tools .tools-row .tool .stroke-and-text-size {
+		@apply text-xs text-center font-medium;
+	}
+	.tools .tools-row .tool .show-sub-tools {
+		@apply cursor-pointer;
+	}
+	.tools .tools-row .sub-tools {
+		@apply flex bg-[#F8F5FF] border-[#bdbdbd] border border-l-0 top-0 bottom-0 absolute left-full ml-3 rounded-r-md overflow-hidden;
+	}
+	.tools .tools-row .sub-tools.inactive {
+		@apply !w-0 invisible;
+	}
+	.tools .tools-row .sub-tools .sub-tool {
+		@apply p-2 m-1 w-10 rounded-md;
+	}
+	.tools .tools-row .sub-tools .sub-tool img {
+		@apply max-w-none;
+	}
+}
